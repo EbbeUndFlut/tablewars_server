@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/EbbeUndFlut/tablewars_server#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.0"
   }
 }
