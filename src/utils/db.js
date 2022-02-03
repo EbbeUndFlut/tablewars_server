@@ -1,26 +1,11 @@
 const { MongoClient } = require("mongodb")
-const URL = "mongodb://localhost:27017/"
+const uri = process.env.DB_URL
+const client = new MongoClient(uri)
 
-// MongoClient.connect(URL, (err, db) => {
-//     if (err) console.log(err)
-
-//     let dbo = db.db("campaign")
-//     dbo.createCollection("players", (err, res) => {
-//         if (err) console.log(err)
-//         console.log("collection created")
-//         db.close()
-//     })
-// })
-
-function createCampaign(campaign) {
-    MongoClient.connect(URL, (err, db) => {
-        if (err) console.log(err)
-        let dbo = db.db("campaign")
-        dbo.collection("user_campaigns").insertOne(campaign, (err, res) => {
-            if (err) console.log(err)
-            db.close()
-        })
-    })
+async function createCampaign(campaign) {
+	await client.connect()
+	const result = await client.db('tablewars').collection('campaigns').insertOne(campaign)
 }
+
 
 module.exports = createCampaign
