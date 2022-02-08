@@ -7,5 +7,18 @@ async function createCampaign(campaign) {
 	const result = await client.db('tablewars').collection('campaigns').insertOne(campaign)
 }
 
+async function createUser(user) {
+	await client.connect()
+	const result = await client.db('tablewars').collection('users').insertOne(user)
+}
 
-module.exports = createCampaign
+async function checkUser(user) {
+	await client.connect()
+	const result = await client.db('tablewars').collection('user').find(user).toArray()
+	return result
+}
+
+module.exports = {
+	createCampaign,
+	checkUser,
+}
